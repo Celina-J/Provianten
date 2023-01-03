@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "name": "provianten-backend",
+  "description": "backend for school project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Celina-J/Provianten-backend.git"
+  },
+  "author": "Celina Johansson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Celina-J/Provianten-backend/issues"
+  },
+  "homepage": "https://github.com/Celina-J/Provianten-backend#readme"
+}
