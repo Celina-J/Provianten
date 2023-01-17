@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/firebase-auth');
+const DB = require('../../config/db');
 
 router.use('/a', auth);
 
+const db = new DB();
+
 router.get('/', (req, res) => {
-    //Query mot databasen
-    res.send('products data here');
+    db.query('SELECT * FROM `products` LIMIT 20')
+        .then(data => {
+            return res.send(data);
+        })
+        .catch(err => res.status(500).send(JSON.stringify(err)));
 });
 
-router.get('/a/add', (req, res) => {
+router.post('/a/add', (req, res) => {
     //Query mot databasen
     res.send('products data here');
 });
