@@ -15,9 +15,4 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).send(JSON.stringify(err)));
 });
 
-router.post('/a/add', (req, res) => {
-    //Query mot databasen
-    res.send('products data here');
-});
-
 module.exports = router;

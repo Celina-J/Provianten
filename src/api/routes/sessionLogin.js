@@ -17,15 +17,17 @@ router.post('/', (req, res) => {
         .then(sessionCookie => {
             const options = {
                 maxAge: expiresIn,
-                httpOnly: true,
+                httpOnly: false,
                 secure: false
             }
-            res.cookie('session', sessionCookie, options);
-            fb.auth().verifyIdToken(req.body.token).then((token) => {
+            
 
+            fb.auth().verifyIdToken(req.body.token).then((token) => {
                 db.query('INSERT IGNORE INTO `accounts` SET ?', [{ id: token.uid, email: token.email }])
                     .catch(err => console.log(err));
-                res.end(JSON.stringify('Logged in'));
+
+                res.cookie('session', sessionCookie, options);
+                res.send(JSON.stringify({session: sessionCookie}));
             })
 
         }).catch(err => res.status(401).send(err));
