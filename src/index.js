@@ -9,6 +9,8 @@ const randomProducts = require('./api/routes/randomProducts');
 const getProductsByIds = require('./api/routes/getProductsByIds');
 const users = require('./api/routes/users');
 const user = require('./api/routes/user');
+const searchProducts = require('./api/routes/searchProducts');
+const orders = require('./api/routes/orders');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
@@ -35,6 +37,8 @@ app.use('/api/randomProducts', randomProducts);
 app.use('/api/get-products-by-ids', getProductsByIds);
 app.use('/api/user', user);
 app.use('/api/users', users);
+app.use('/api/search-products', searchProducts);
+app.use('/api/orders', orders);
 app.use(express.static(__dirname + '/public'));
 
 //============================//

@@ -15,4 +15,16 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).send(JSON.stringify(err)));
 });
 
+router.put('/', (req, res) => {
+    db.query('INSERT INTO `categories` SET ? ON DUPLICATE KEY UPDATE ?', [{id: req.body.id, name: req.body.catName}, {id: req.body.id, name: req.body.catName}])
+        .then(data => {
+            return res.send(data);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send(err);
+        }) 
+            
+});
+
 module.exports = router;

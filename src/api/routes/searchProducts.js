@@ -9,7 +9,7 @@ const db = new DB();
 
 router.get('/', (req, res) => {
 
-    db.query('SELECT * FROM `products` WHERE `name` LIKE ? LIMIT 8', [`%${req.query.searchTxt}%`])
+    db.query('SELECT * FROM `products` WHERE `name` LIKE ?', [`%${req.query.search}%`])
         .then(data => {
             return res.send(data);
         })
