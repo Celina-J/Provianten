@@ -17,6 +17,26 @@ router.get('/a', (req, res) => {
         .catch(err => res.status(500).send(JSON.stringify(err)));
 });
 
+router.get('/', (req, res) => {
+    db.query('SELECT * FROM `orders` WHERE customer_id=?', [req.query.userid])
+        .then(data => {
+            return res.send(data);
+        })
+        .catch(err => res.status(500).send(JSON.stringify(err)));
+});
+
+router.post('/orders-products', (req, res) => {
+    db.query('SELECT * FROM `orders_products` WHERE `order_id`=?', [req.query.orderid])
+        .then(data => {
+            return res.send(data);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).send(JSON.stringify(err))
+        });
+});
+
+
+
 router.put('/a', (req, res) => {
     db.query('UPDATE `orders` SET `status`=? WHERE id=?', [req.body.status, req.body.id])
         .then(data => {
@@ -37,7 +57,6 @@ router.post('/', (req, res) => {
 
     db.query('INSERT INTO `orders` SET ?', [orderData])
         .then(data => {
-            console.log(data.insertId);
             let products = req.body.products.map(p => {
                 return {
                     product_id: p.id,
@@ -49,18 +68,18 @@ router.post('/', (req, res) => {
             });
 
             db.query('INSERT INTO `orders_products` (product_id, order_id, product_name, product_price, quantity) VALUES ?', [products.map(p => Object.values(p))])
-            .then(data => {
-                return res.send(data);
-            }).catch(err => {
-                console.log(err);
-                res.status(500).send(JSON.stringify(err))
-            });
+                .then(data => {
+                    return res.send(data);
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send(JSON.stringify(err))
+                });
         })
         .catch(err => {
             console.log(err);
             res.status(500).send(JSON.stringify(err))
         });
-    
+
 });
 
 module.exports = router;
