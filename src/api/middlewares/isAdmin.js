@@ -2,6 +2,7 @@ const DB = require('../../config/db');
 
 const db = new DB();
 
+//Middleware for checking if requester is admin
 const verifyAdmin = (req, res, next) => {
     if (!req.locals.uid)
         return res.status(401).send(JSON.stringify('UNAUTHORIZED'));

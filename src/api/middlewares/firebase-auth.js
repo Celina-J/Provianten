@@ -1,7 +1,7 @@
 const firebase = require('firebase-admin');
 const firebaseCred = require('../../../firebase-admin.json');
 
-
+//Firebase authentication middleware 
 const authentication = (req, res, next) => {
 
     //No cookies :(

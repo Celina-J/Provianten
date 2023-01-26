@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/a', (req, res) => {
     let productData = {
         id: req.body.id, 
         name: req.body.name,
